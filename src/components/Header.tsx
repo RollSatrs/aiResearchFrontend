@@ -27,13 +27,7 @@ export default function Header({ onThemeToggle, isDarkMode }: HeaderProps) {
 
           {/* Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link
-              href="/"
-              className="flex items-center space-x-1 px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              <Home className="w-4 h-4" />
-              <span>Search</span>
-            </Link>
+
             <Link
               href="/deep-research"
               className="flex items-center space-x-1 px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
