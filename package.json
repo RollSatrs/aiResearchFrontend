@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 2005",
+    "dev": "next dev2005",
     "build": "next build",
-    "start": "next start -p 2005",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
