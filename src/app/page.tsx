@@ -32,14 +32,6 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/search"
-              className="inline-flex items-center px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold"
-            >
-              <Search className="w-5 h-5 mr-2" />
-              Start Searching
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-            <Link
               href="/deep-research"
               className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors text-lg font-semibold"
             >
@@ -98,32 +90,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        {/* CTA */}
-        {!isAuthenticated && (
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-white mb-4">
-              Ready to start researching?
-            </h2>
-            <p className="text-gray-300 mb-6">
-              Create an account to save your research and get personalized recommendations
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/register"
-                className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
-              >
-                Get Started Free
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex items-center px-6 py-3 border border-white/20 text-white rounded-lg hover:bg-white/10 transition-colors font-semibold"
-              >
-                Sign In
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

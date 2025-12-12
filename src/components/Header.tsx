@@ -50,40 +50,6 @@ export default function Header({ onThemeToggle, isDarkMode }: HeaderProps) {
                 <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               )}
             </button>
-
-            {/* User Menu */}
-            {isAuthenticated && user ? (
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <UserIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {user.name || user.email}
-                  </span>
-                </div>
-                <button
-                  onClick={logout}
-                  className="flex items-center space-x-1 px-3 py-1.5 text-sm text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Выйти</span>
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-2">
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-                >
-                  Войти
-                </Link>
-                <Link
-                  href="/register"
-                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Регистрация
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       </div>
