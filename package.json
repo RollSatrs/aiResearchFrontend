@@ -12,7 +12,7 @@
   "dependencies": {
     "@heroui/modal": "^2.2.24",
     "@nestjs/mapped-types": "*",
-    "axios": "^1.7.7",
+    "axios": "^1.13.0",
     "docx": "^9.5.1",
     "file-saver": "^2.0.5",
     "lucide-react": "^0.263.1",
