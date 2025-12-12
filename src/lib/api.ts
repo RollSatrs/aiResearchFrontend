@@ -11,6 +11,7 @@ import {
 } from '../types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+console.log('api url', API_BASE_URL)
 
 const api = axios.create({
     baseURL: API_BASE_URL,
