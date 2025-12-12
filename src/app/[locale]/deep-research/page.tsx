@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Header from '@/components/Header';
-import DeepSearchBar from '@/components/DeepSearchBar';
+import { useTranslations } from 'next-intl';
+import Header from '../../../components/Header';
+import DeepSearchBar from '../../../components/DeepSearchBar';
 import { Sparkles } from 'lucide-react';
 import { Document, Packer, Paragraph } from 'docx';
 import { saveAs } from "file-saver";
-import { CustomSpinner, MiniCustomSpinner } from '@/components/ui/CustomSpinner';
+import { CustomSpinner, MiniCustomSpinner } from '../../../components/ui/CustomSpinner';
 
 interface Paper {
   id: string;
@@ -32,6 +33,7 @@ interface DeepResearchResult {
 }
 
 export default function DeepResearchPage() {
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useState(false);
   const [isAnalyitcLoding, setIsAnalyitcLoding] = useState(false);
   const [isDocLoading, setDocLoading] = useState(false)
@@ -55,15 +57,15 @@ export default function DeepResearchPage() {
             properties: {},
             children: [
               ...(paper.title ? [new Paragraph({ text: paper.title })] : []),
-              ...(paper.authors?.length ? [new Paragraph({ text: `Авторы: ${paper.authors.join(", ")}` })] : []),
-              ...(paper.year ? [new Paragraph({ text: `Дата публикации: ${paper.year}` })] : []),
-              ...(paper.summary ? [new Paragraph({ text: `Резюме:\n${paper.summary}` })] : []),
-              ...(paper.abstract ? [new Paragraph({ text: `Аннотация:\n${paper.abstract}` })] : []),
+              ...(paper.authors?.length ? [new Paragraph({ text: `${t('common.authors')}: ${paper.authors.join(", ")}` })] : []),
+              ...(paper.year ? [new Paragraph({ text: `${t('common.publicationDate')}: ${paper.year}` })] : []),
+              ...(paper.summary ? [new Paragraph({ text: `${t('common.summary')}:\n${paper.summary}` })] : []),
+              ...(paper.abstract ? [new Paragraph({ text: `${t('common.abstract')}:\n${paper.abstract}` })] : []),
               ...(Array.isArray(paper.keyWords) && paper.keyWords.length
-                ? [new Paragraph({ text: `Ключевые слова: ${paper.keyWords.join(", ")}` })]
+                ? [new Paragraph({ text: `${t('common.keywords')}: ${paper.keyWords.join(", ")}` })]
                 : []),
               ...(Array.isArray(paper.topic) && paper.topic.length
-                ? [new Paragraph({ text: `Тема статьи: ${paper.topic.join(", ")}` })]
+                ? [new Paragraph({ text: `${t('common.articleTopic')}: ${paper.topic.join(", ")}` })]
                 : []),
             ]
           }
@@ -75,7 +77,7 @@ export default function DeepResearchPage() {
       });
     } catch (err) {
       console.error(err);
-      setError("Ошибка при генерации документа");
+      setError(t('errors.documentGeneration'));
     } finally {
       setDocLoading(false);
     }
@@ -130,12 +132,12 @@ export default function DeepResearchPage() {
         }),
       });
 
-      if (!response.ok) throw new Error(`Ошибка HTTP! статус: ${response.status}`);
+      if (!response.ok) throw new Error(`${t('errors.httpError')}: ${response.status}`);
 
       const data = await response.json();
       setResult(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Произошла ошибка');
+      setError(err instanceof Error ? err.message : t('errors.unknownError'));
     } finally {
       setIsLoading(false);
     }
@@ -148,9 +150,9 @@ export default function DeepResearchPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Заголовок */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">🔬 Глубокое Исследование</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">{t('deepResearch.title')}</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Комплексные академические исследования по множеству научных баз данных.
+            {t('deepResearch.subtitle')}
           </p>
         </div>
 
@@ -158,8 +160,8 @@ export default function DeepResearchPage() {
         <div className="max-w-4xl mx-auto mb-8">
           <DeepSearchBar
             onSearch={handleDeepResearch}
-            placeholder="Введите тему исследования"
-            buttonText="🚀 Начать Глубокое Исследование"
+            placeholder={t('deepResearch.placeholder')}
+            buttonText={t('deepResearch.button')}
             loading={isLoading}
           />
         </div>
@@ -168,7 +170,7 @@ export default function DeepResearchPage() {
         {error && (
           <div className="max-w-4xl mx-auto mb-8">
             <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
-              <h3 className="text-red-400 font-semibold mb-2">Ошибка</h3>
+              <h3 className="text-red-400 font-semibold mb-2">{t('common.error')}</h3>
               <p className="text-red-300">{error}</p>
             </div>
           </div>
@@ -182,10 +184,10 @@ export default function DeepResearchPage() {
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
                 <div>
                   <h3 className="text-blue-400 font-semibold">
-                    Идет глубокое исследование...
+                    {t('deepResearch.loading')}
                   </h3>
                   <p className="text-blue-300 text-sm">
-                    Поиск по академическим базам данных
+                    {t('deepResearch.loadingSubtitle')}
                   </p>
                 </div>
               </div>
@@ -198,33 +200,33 @@ export default function DeepResearchPage() {
           <div className="max-w-6xl mx-auto">
             {/* Сводка */}
             <div className="bg-white/5 backdrop-blur-md rounded-lg border border-white/10 p-6 mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4">📊 Сводка исследования</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">{t('deepResearch.summary.title')}</h2>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="text-center p-4 bg-blue-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-blue-400">{result.totalResults}</div>
-                  <div className="text-sm text-blue-300">Найдено статей</div>
+                  <div className="text-sm text-blue-300">{t('deepResearch.summary.articlesFound')}</div>
                 </div>
                 <div className="text-center p-4 bg-green-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-green-400">{result.totalSources}</div>
-                  <div className="text-sm text-green-300">Источники</div>
+                  <div className="text-sm text-green-300">{t('deepResearch.summary.sources')}</div>
                 </div>
                 <div className="text-center p-4 bg-purple-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-purple-400">
                     {(result.searchTime / 1000).toFixed(1)}с
                   </div>
-                  <div className="text-sm text-purple-300">Время поиска</div>
+                  <div className="text-sm text-purple-300">{t('deepResearch.summary.searchTime')}</div>
                 </div>
                 <div className="text-center p-4 bg-yellow-500/10 rounded-lg">
                   <div className="text-2xl font-bold text-yellow-400">{result.researchDepth}</div>
-                  <div className="text-sm text-yellow-300">Глубина</div>
+                  <div className="text-sm text-yellow-300">{t('deepResearch.summary.depth')}</div>
                 </div>
               </div>
             </div>
 
             {/* Источники */}
             <div className="bg-white/5 backdrop-blur-md rounded-lg border border-white/10 p-6 mb-8">
-              <h3 className="text-xl font-semibold text-white mb-4">🔍 Источники</h3>
+              <h3 className="text-xl font-semibold text-white mb-4">{t('deepResearch.sources.title')}</h3>
               <div className="flex flex-wrap gap-2">
                 {result.sources.map((source) => (
                   <span
@@ -239,7 +241,7 @@ export default function DeepResearchPage() {
 
             {/* СТАТЬИ */}
             <div className="bg-white/5 backdrop-blur-md rounded-lg border border-white/10 p-6">
-              <h3 className="text-xl font-semibold text-white mb-6">📑 Научные статьи</h3>
+              <h3 className="text-xl font-semibold text-white mb-6">{t('deepResearch.papers.title')}</h3>
 
               <div className="space-y-4">
                 {result.papers.map((paper) => (
@@ -263,7 +265,7 @@ export default function DeepResearchPage() {
                     </div>
 
                     <p className="text-gray-300 text-sm mb-3">
-                      <strong>Авторы:</strong> {paper.authors.join(', ') || 'Неизвестно'}
+                      <strong>{t('common.authors')}:</strong> {paper.authors.join(', ') || t('common.unknown')}
                     </p>
 
                     {paper.abstract && (
@@ -280,7 +282,7 @@ export default function DeepResearchPage() {
                           rel="noopener noreferrer"
                           className="text-blue-400 hover:text-blue-300 text-sm"
                         >
-                          Просмотреть статью
+                          {t('common.viewArticle')}
                         </a>
                       )}
 
@@ -289,7 +291,7 @@ export default function DeepResearchPage() {
                         className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
                       >
                         <Sparkles className="w-4 h-4" />
-                        <span className="text-sm">Анализ</span>
+                        <span className="text-sm">{t('common.analysis')}</span>
                       </button>
                     </div>
                   </div>
@@ -321,7 +323,7 @@ export default function DeepResearchPage() {
                 </button>
 
                 <h2 className="text-2xl font-bold break-words pr-10">
-                  ✨ Анализ: {modalPaper.title}
+                  {t('deepResearch.modal.title')}: {modalPaper.title}
                 </h2>
               </div>
 
@@ -338,27 +340,27 @@ export default function DeepResearchPage() {
                   <>
                     {/* Авторы */}
                     <p className="text-gray-300 text-sm">
-                      <strong>Авторы:</strong> {modalPaper.authors.join(', ')}
+                      <strong>{t('common.authors')}:</strong> {modalPaper.authors.join(', ')}
                     </p>
 
                     {/* Резюме */}
                     {modalPaper.summary && (
                       <p className="text-gray-200 text-sm">
-                        <strong>Резюме:</strong> {modalPaper.summary}
+                        <strong>{t('common.summary')}:</strong> {modalPaper.summary}
                       </p>
                     )}
 
                     {/* Тема */}
                     {modalPaper.topic && (
                       <p className="text-gray-300 text-sm">
-                        <strong>Тема статьи:</strong> {modalPaper.topic}
+                        <strong>{t('common.articleTopic')}:</strong> {Array.isArray(modalPaper.topic) ? modalPaper.topic.join(', ') : modalPaper.topic}
                       </p>
                     )}
 
                     {/* Ключевые слова */}
                     {modalPaper.keyWords && modalPaper.keyWords.length > 0 && (
                       <div>
-                        <h4 className="font-semibold text-lg mb-2">🔑 Ключевые слова</h4>
+                        <h4 className="font-semibold text-lg mb-2">🔑 {t('common.keywords')}</h4>
                         <div className="flex flex-wrap gap-2">
                           {modalPaper.keyWords.map((k, i) => (
                             <span
@@ -375,7 +377,7 @@ export default function DeepResearchPage() {
                       className="flex gap-2 text-sm md:w-auto px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
                       onClick={() => generateSimpleWord(modalPaper)}
                     >
-                      {isDocLoading ? "Загрузка...": "📥 Скачать DOCX"}
+                      {isDocLoading ? t('common.loading'): t('deepResearch.modal.downloadDocx')}
                       {isDocLoading ? <MiniCustomSpinner/>: null}
                     </button>
                   </>

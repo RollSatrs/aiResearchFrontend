@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Search, Loader } from 'lucide-react';
 
 interface SearchBarProps {
@@ -9,6 +10,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSearch, loading }: SearchBarProps) {
+  const t = useTranslations();
   const [query, setQuery] = useState('');
   const [provider, setProvider] = useState('semantic_scholar');
   const [limit, setLimit] = useState(10);
@@ -29,7 +31,7 @@ export default function SearchBar({ onSearch, loading }: SearchBarProps) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Поиск научных публикаций..."
+            placeholder={t('search.placeholder')}
             className="w-full px-4 py-3 pl-12 pr-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             disabled={loading}
           />
@@ -40,7 +42,7 @@ export default function SearchBar({ onSearch, loading }: SearchBarProps) {
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-2">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Источник:
+              {t('search.provider')}:
             </label>
             <select
               value={provider}
@@ -56,7 +58,7 @@ export default function SearchBar({ onSearch, loading }: SearchBarProps) {
 
           <div className="flex items-center space-x-2">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Количество:
+              {t('search.limit')}:
             </label>
             <select
               value={limit}
@@ -80,7 +82,7 @@ export default function SearchBar({ onSearch, loading }: SearchBarProps) {
             ) : (
               <Search className="w-4 h-4" />
             )}
-            <span>Поиск</span>
+            <span>{t('common.search')}</span>
           </button>
         </div>
       </div>

@@ -1,0 +1,89 @@
+{
+  "common": {
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "download": "Download",
+    "authors": "Authors",
+    "year": "Year",
+    "source": "Source",
+    "sources": "Sources",
+    "viewArticle": "View Article",
+    "analysis": "Analysis",
+    "summary": "Summary",
+    "abstract": "Abstract",
+    "keywords": "Keywords",
+    "topic": "Topic",
+    "articleTopic": "Article Topic",
+    "publicationDate": "Publication Date",
+    "unknown": "Unknown"
+  },
+  "header": {
+    "title": "AI Research Assistant"
+  },
+  "home": {
+    "title": "AI Research Assistant",
+    "subtitle": "Powerful academic research tool powered by AI. Search across multiple scientific databases, get comprehensive insights, and accelerate your research process.",
+    "deepResearch": "Deep Research",
+    "features": {
+      "multipleSources": {
+        "title": "Multiple Sources",
+        "description": "Search across arXiv, PubMed, Semantic Scholar, and CrossRef simultaneously"
+      },
+      "deepResearch": {
+        "title": "Deep Research",
+        "description": "Comprehensive research mode with intelligent analysis and deduplication"
+      },
+      "aiSummaries": {
+        "title": "AI Summaries",
+        "description": "Get AI-powered summaries and insights from research papers"
+      }
+    },
+    "stats": {
+      "academicSources": "Academic Sources",
+      "researchPapers": "Research Papers",
+      "poweredAnalysis": "Powered Analysis",
+      "realTimeSearch": "Real-time Search"
+    }
+  },
+  "search": {
+    "placeholder": "Search scientific publications...",
+    "provider": "Source",
+    "limit": "Count",
+    "searching": "Searching..."
+  },
+  "deepResearch": {
+    "title": "🔬 Deep Research",
+    "subtitle": "Comprehensive academic research across multiple scientific databases.",
+    "placeholder": "Enter research topic",
+    "button": "🚀 Start Deep Research",
+    "researching": "Researching...",
+    "loading": "Conducting deep research...",
+    "loadingSubtitle": "Searching academic databases",
+    "summary": {
+      "title": "📊 Research Summary",
+      "articlesFound": "Articles Found",
+      "sources": "Sources",
+      "searchTime": "Search Time",
+      "depth": "Depth"
+    },
+    "sources": {
+      "title": "🔍 Sources"
+    },
+    "papers": {
+      "title": "📑 Scientific Articles"
+    },
+    "modal": {
+      "title": "✨ Analysis",
+      "downloadDocx": "📥 Download DOCX",
+      "downloading": "Loading..."
+    }
+  },
+  "errors": {
+    "httpError": "HTTP error! status",
+    "unknownError": "An error occurred",
+    "documentGeneration": "Error generating document"
+  }
+}
+

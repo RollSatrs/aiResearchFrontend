@@ -1,12 +1,14 @@
 'use client';
 
-import Link from 'next/link';
-import { useAuth } from '../contexts/AuthContext';
-import Header from '../components/Header';
+import { useTranslations } from 'next-intl';
+import { useAuth } from '../../contexts/AuthContext';
+import Header from '../../components/Header';
 import { Search, Zap, Database, BookOpen, ArrowRight } from 'lucide-react';
+import { Link } from '../../i18n/routing';
 
 export default function HomePage() {
   const { isAuthenticated, loading } = useAuth();
+  const t = useTranslations();
 
   if (loading) {
     return (
@@ -24,11 +26,10 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-white mb-6">
-            AI Research Assistant
+            {t('home.title')}
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Powerful academic research tool powered by AI. Search across multiple scientific databases,
-            get comprehensive insights, and accelerate your research process.
+            {t('home.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -36,7 +37,7 @@ export default function HomePage() {
               className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors text-lg font-semibold"
             >
               <Zap className="w-5 h-5 mr-2" />
-              Deep Research
+              {t('home.deepResearch')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
@@ -46,25 +47,25 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-6 text-center">
             <Database className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-3">Multiple Sources</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">{t('home.features.multipleSources.title')}</h3>
             <p className="text-gray-300">
-              Search across arXiv, PubMed, Semantic Scholar, and CrossRef simultaneously
+              {t('home.features.multipleSources.description')}
             </p>
           </div>
 
           <div className="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-6 text-center">
             <Zap className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-3">Deep Research</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">{t('home.features.deepResearch.title')}</h3>
             <p className="text-gray-300">
-              Comprehensive research mode with intelligent analysis and deduplication
+              {t('home.features.deepResearch.description')}
             </p>
           </div>
 
           <div className="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-6 text-center">
             <BookOpen className="w-12 h-12 text-green-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-3">AI Summaries</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">{t('home.features.aiSummaries.title')}</h3>
             <p className="text-gray-300">
-              Get AI-powered summaries and insights from research papers
+              {t('home.features.aiSummaries.description')}
             </p>
           </div>
         </div>
@@ -74,19 +75,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="text-3xl font-bold text-blue-400 mb-2">4+</div>
-              <div className="text-gray-300">Academic Sources</div>
+              <div className="text-gray-300">{t('home.stats.academicSources')}</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-green-400 mb-2">1M+</div>
-              <div className="text-gray-300">Research Papers</div>
+              <div className="text-gray-300">{t('home.stats.researchPapers')}</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-purple-400 mb-2">AI</div>
-              <div className="text-gray-300">Powered Analysis</div>
+              <div className="text-gray-300">{t('home.stats.poweredAnalysis')}</div>
             </div>
             <div>
               <div className="text-3xl font-bold text-yellow-400 mb-2">Fast</div>
-              <div className="text-gray-300">Real-time Search</div>
+              <div className="text-gray-300">{t('home.stats.realTimeSearch')}</div>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Search, Loader, Zap } from 'lucide-react';
 
 interface DeepSearchBarProps {
@@ -13,10 +14,14 @@ interface DeepSearchBarProps {
 export default function DeepSearchBar({
   onSearch,
   loading,
-  placeholder = "Enter research topic...",
-  buttonText = "Start Deep Research"
+  placeholder,
+  buttonText
 }: DeepSearchBarProps) {
+  const t = useTranslations();
   const [query, setQuery] = useState('');
+
+  const defaultPlaceholder = placeholder || t('deepResearch.placeholder');
+  const defaultButtonText = buttonText || t('deepResearch.button');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +37,7 @@ export default function DeepSearchBar({
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={placeholder}
+          placeholder={defaultPlaceholder}
           className="flex-1 px-6 py-4 pl-14 pr-4 text-lg border-2 border-white/20 rounded-l-xl bg-white/10 backdrop-blur-md text-white placeholder-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none"
           disabled={loading}
         />
@@ -46,12 +51,12 @@ export default function DeepSearchBar({
           {loading ? (
             <>
               <Loader className="w-5 h-5 animate-spin" />
-              <span>Researching...</span>
+              <span>{t('deepResearch.researching')}</span>
             </>
           ) : (
             <>
               <Zap className="w-5 h-5" />
-              <span>{buttonText}</span>
+              <span>{defaultButtonText}</span>
             </>
           )}
         </button>
